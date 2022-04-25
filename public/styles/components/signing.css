@@ -1,0 +1,116 @@
+h1
+{
+    text-align: center;
+}
+
+.signing-layout 
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+}
+
+.signing-layout h2 
+{
+    font-size: 1.625em;
+    font-weight: 700;
+    color: var(--main-peach);
+}
+
+.signing-layout .unknown-pp
+{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: var(--secondary-gray);
+    margin: 0 auto;
+}
+
+.signing-layout .form-field
+{
+    width: 100%
+}
+
+.form-field form 
+{
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1.2rem;
+}
+
+.form-field form label 
+{
+    color: var(--main-gray);
+    margin-bottom: .4rem;
+} 
+
+.form-field form input 
+{
+    color: var(--main-black);
+    padding: .625rem;
+    font-size: 1em;
+    font-weight: 500;
+    border: none;
+    outline-style: none;
+    border: 1px solid var(--main-black);
+    transition: border-color .3s
+}
+
+.form-field form input:focus 
+{
+    border-color: var(--main-peach);
+}
+
+.form-field label, .form-field input, .form-field button, .form-field .alternative-text 
+{
+    display: block;
+    width: 100%;
+}
+
+.form-field button 
+{
+    padding: .625rem;
+    background: var(--main-peach);
+    font-size: 1em;
+    font-weight: 500;
+    color: var(--main-white);
+    border: none;
+    outline-style: none;
+}
+
+.form-field .alternative-text
+{
+    margin-top: .5rem;
+    font-size: .8em;
+}
+
+@media screen and (min-width: 768px)
+{
+    h1
+    {
+        text-align: left;
+    }
+
+    .signing-layout 
+    {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .form-field form 
+    {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: .8rem;
+    }
+
+    .form-field button 
+    {
+        grid-column: span 2;
+    }
+}
+
+@media screen and (min-width: 1024px)
+{
+
+}

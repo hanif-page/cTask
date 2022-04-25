@@ -1,0 +1,7 @@
+<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+
+<span class="iconify" data-icon="clarity:trash-line"></span>
+<span class="iconify" data-icon="akar-icons:check"></span>
+<span class="iconify" data-icon="bxs:pencil"></span>
+<span class="iconify" data-icon="clarity:close-line"></span>
+<span class="iconify" data-icon="carbon:logout"></span>
