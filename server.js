@@ -17,21 +17,26 @@ app.use(express.static('public'))
 app.get('/', (req, res) => {
     res.render("index", {
         pageType: "index",
-        title: "cTask"
+        title: "cTask",
+        userProfilePictUrl: ""
     })
 })
 
-app.get('/user/login', (req, res) => {
+app.get('/login', (req, res) => {
     res.render("login", {
         pageType: "signing",
         title: "cTask | Login"
     })
 })
-app.get('/user/signup', (req, res) => {
-    res.render("signup", {
+app.get('/signup', (req, res) => {
+    res.render("sign-up", {
         pageType: "signing",
         title: "cTask | Sign Up"
     })
+})
+
+app.use((req, res, next) => {
+    res.send("<h1>404 Not Found</h1><br><a href='/' style='color: purple'>Back to Home Page</a>")
 })
 
 app.listen(port, () => console.log(`\nServer running on http://localhost:${port}\n`))
