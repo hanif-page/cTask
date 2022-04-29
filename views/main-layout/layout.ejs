@@ -53,10 +53,10 @@
         </footer>
     </div>
 
-    <section>
-        <% if (pageType == "profile") { %>
-            <%- include("../partials/mobile-nav.ejs") %> 
-        <% } %>
-    </section>
+    <% if (pageType == "profile") { %>
+        <%- include("../partials/mobile-nav.ejs") %> 
+
+        <script defend src="/scripts/mobile-nav.js"></script>
+    <% } %>
 </body>
 </html>

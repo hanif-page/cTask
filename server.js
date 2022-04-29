@@ -28,10 +28,25 @@ app.get('/login', (req, res) => {
         title: "cTask | Login"
     })
 })
+
 app.get('/signup', (req, res) => {
     res.render("sign-up", {
         pageType: "signing",
         title: "cTask | Sign Up"
+    })
+})
+
+app.get('/user/profile/', (req, res) => {
+    res.render("profile", {
+        pageType: 'profile',
+        title: "cTask | [Username] Profile"
+    })
+})
+
+app.get('/user/profile/edit', (req, res) => {
+    res.render("update-profile", {
+        pageType: 'profile',
+        title: "cTask | Edit [Username] Profile"
     })
 })
 
