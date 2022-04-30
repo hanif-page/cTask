@@ -1,0 +1,27 @@
+<% if (typeof errors != 'undefined') { %>
+    <% errors.forEach(error => { %>
+        <div class="banner error-banner">
+            <div class="text"><%= error.msg %></div>
+            <span class="iconify close-icon" data-icon="clarity:close-line"></span>
+        </div>
+    <% }) %>
+<% } %> 
+
+<% if (success_msg != '') { %>
+    <div class="banner success-banner">
+        <%= success_msg %>
+        <span class="iconify close-icon" data-icon="clarity:close-line"></span>
+    </div>
+<% } %>
+<% if (error_msg != '') { %>
+    <div class="banner error-banner">
+        <%= error_msg %>
+        <span class="iconify close-icon" data-icon="clarity:close-line"></span>
+    </div>
+<% } %>
+<% if (error != '') { %>
+    <div class="banner error-banner">
+        <%= error %>
+        <span class="iconify close-icon" data-icon="clarity:close-line"></span>
+    </div>
+<% } %>

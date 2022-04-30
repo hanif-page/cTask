@@ -7,10 +7,26 @@
     align-items: center;
 }
 
-.unset-user-pp
+.index-header .profile-thumbnail
+{
+    display: flex;
+    align-items: center;
+    /* flex-direction: row-reverse; */
+    gap: .5rem;
+}
+
+.index-header .profile-thumbnail .username
+{
+    margin-bottom: .2rem;
+    font-weight: 600;
+    color: var(--main-peach);
+}
+
+.index-header .pp-image
 {
     width: 45px;
     height: 45px;
+    object-fit: cover;
     border-radius: 50%;
     background: var(--secondary-gray);
 }

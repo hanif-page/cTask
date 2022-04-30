@@ -3,17 +3,17 @@
     
     <% let data = {} // temporary variable %> 
 
-    <!-- some logic, to check if the profile picture exist or not -->
-    <% if (!data.userProfilePictUrl) { %>
-        <a href="/user/profile">
-            <div class="unset-user-pp">
-                <div class="headShape"></div>
-                <div class="bodyShape"></div>
-            </div>
-        </a>
-    <% } else { %>
-        <a href="/user/profile/<%= data._id %>">
-            <img src="<%= data.userProfilePictUrl %>" alt="<%= data.username || "User" %> Profile Picture.">
-        </a>
-    <% } %>
+    <a class="profile-thumbnail" href="/user/profile">
+        <h6 class="username">
+            <% // let username = "Haniff" %> 
+            <%= userData.username %> 
+        </h6>
+        
+        <!-- some logic, to check if the profile picture exist or not -->
+        <% if (userData.profilePicturePath) { %>
+            <img src="<%= userData.profilePicturePath %>" alt="<%= userData.username %> profile picture" class="pp-image">
+        <% } else { %>
+            <img src="/unknown-pp.jpg" alt="Unknown Profile Picture" class="pp-image">        
+        <% } %> 
+    </a>
 </div>

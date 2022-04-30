@@ -127,6 +127,17 @@ nav.mobile-nav.opened
     background: var(--main-black);
     border-radius: 50%;
     margin: 0 auto;
+    object-fit: cover;
+}
+
+.profile-content .pp-preview
+{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
 }
 
 .profile-content .data-section 
@@ -168,6 +179,24 @@ nav.mobile-nav.opened
 }
 
 /* Update Profile Page */
+.filepond--root 
+{
+    font-family: "Montserrat";
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.filepond--panel-root 
+{
+    background-color: var(--main-peach) !important;
+}
+
+.filepond--drop-label
+{
+    color: var(--main-white) !important;
+    font-size: .8em !important;
+}
+
 .pp-container .edit-icon
 {
     padding: 5px;
@@ -205,6 +234,11 @@ nav.mobile-nav.opened
     font-size: .8em;
     color: var(--main-purple);
     margin-top: -.7rem;
+}
+
+.data-section a.change-password:hover 
+{
+    text-decoration: underline;
 }
 
 .profile-content .buttons

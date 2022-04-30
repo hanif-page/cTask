@@ -1,22 +1,26 @@
-<div class="profile-content">
+<%- include("partials/messages")  %> 
+
+<form action="/user/profile/edit?_method=PUT" method="post" class="profile-content inner-container">
+    <input name="profilepicture" type="file" id="pp-fileinput" class="filepond">
     <div class="pp-container">
-        <div class="pp-image">
-            <a href="" class="edit-icon">
-                Edit
-                <!-- <span class="iconify" data-icon="bxs:pencil"></span> -->
-            </a>
-        </div>
+        <!-- Check if the profile picture is undefined -->
+        <% if (userData.profilePicturePath) { %>
+            <img src="<%= userData.profilePicturePath %>" alt="<%= userData.username %> Profile Picture" class="pp-preview">
+        <% } else { %>
+            <img src="/unknown-pp.jpg" alt="Unknown Profile Picture" class="pp-preview">
+        <% } %> 
     </div>
 
     <div class="data-section">
         <div class="data">
             <div class="label">Username</div>
-            <input class="information" type="text" name="username" value="Haniff">
+            <input class="information" type="text" name="username" value="<%= userData.username %>">
         </div>
         <div class="data">
             <div class="label">Email</div>
-            <input type="email" class="information" name="email" value="amrhanif15@gmail.com">
+            <input type="email" class="information" name="email" value="<%= userData.email %>">
         </div>
+        <input type="email" class="information" name="prevEmail" value="<%= userData.email %>" hidden>
         <div class="data">
             <div class="label">Password</div>
             <input type="password" class="information" name="password" value="********" disabled>
@@ -28,8 +32,6 @@
 
     <div class="buttons">
         <a href="/user/profile" class="edit-profile-btn" style="margin: 0;">Cancel</a>
-        <form action="">
-            <button>Update</button>
-        </form>
+        <button>Update</button>
     </div>
-</div>
+</form>

@@ -1,25 +1,27 @@
+<%- include("partials/messages")  %> 
+
 <div class="signing-layout inner-container">
     <h2>Sign Up</h2>
 
-    <div class="unknown-pp"></div>
+    <img src="/unknown-pp.jpg" alt="Unknown Profile Picture" class="unknown-pp">
 
     <div class="form-field">
-        <form action="">
+        <form action="/signup" method="post">
             <div>
                 <label for="username">Username</label>
-                <input type="text" name="username" placeholder="Your username here...">
+                <input type="text" name="username" placeholder="Your username here..." value="<%= lastInput.username %>">
             </div>
             <div>
                 <label for="email">Email</label>
-                <input type="email" name="email" placeholder="Your email here...">
+                <input type="email" name="email" placeholder="Your email here..." value="<%= lastInput.email %>">
             </div>
             <div>
                 <label for="password">Password</label>
-                <input type="password" name="password" placeholder="Your password here...">
+                <input type="password" name="password" placeholder="Your password here..." value="<%= lastInput.password %>">
             </div>
             <div>
                 <label for="confirmPassword">Confirm Password</label>
-                <input type="password" name="confirmPassword" placeholder="Confirm ur password here...">
+                <input type="password" name="confirmPassword" placeholder="Confirm ur password here..." value="<%= lastInput.confirmPassword %>">
             </div>
             <button>Sign Up</button>
         </form>

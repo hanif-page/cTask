@@ -8,32 +8,35 @@
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
     
     <!-- Filepond stylesheet -->
-    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
-    <link
-    href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
-    rel="stylesheet"
-    />
-
+    
     <link rel="stylesheet" href="/styles/reset.css">
     <link rel="stylesheet" href="/styles/main.css">
+    
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
 
     <!-- Load FilePond library -->
     <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
     <script defer src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
     <script defer src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script defer src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
-    <!-- <script defer src="/javascripts/fileUpload.js"></script> -->
+    
+    <% if (pageType == "profile") { %>
+        <script defer src="/scripts/fileUpload.js"></script>
+    <% } %>
 
     <% if (pageType == "index") { %>
         <script defer src="/scripts/checkbox-task.js"></script>
     <% } %> 
+
+    <script defer src="/scripts/script.js"></script>
 </head>
 <body>
     <div class="container">
         <header>
             <% if(pageType == "index") { %>
                 <%- include("../partials/index-header.ejs") %> 
-            <% } else if (pageType == "signing") { %>
+            <% } else if (pageType == "signing" || pageType == "404") { %>
                 <%- include("../partials/signing-header.ejs") %>     
             <% } else if (pageType == "profile") { %>
                 <%- include("../partials/profile-header.ejs") %>

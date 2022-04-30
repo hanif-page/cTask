@@ -1,16 +1,25 @@
-<div class="profile-content">
-    <div class="pp-image">
+<%- include("partials/messages")  %> 
 
-    </div>
+<div class="profile-content inner-container">
+    <% if (userData.profilePicturePath) { %>
+        <!-- <value is too large to edit> -->
+        <img src="<%= userData.profilePicturePath %>" alt="<%= userData.username %> Profile Picture" class="pp-image">
+    <% } else { %>
+        <img src="/unknown-pp.jpg" alt="Unknown Profile Picture" class="pp-image">
+    <% } %> 
 
     <div class="data-section">
         <div class="data">
             <div class="label">Username</div>
-            <div class="information">Haniff</div>
+            <div class="information">
+                <%= userData.username %> 
+            </div>
         </div>
         <div class="data">
             <div class="label">Email</div>
-            <div class="information">amrhanif15@gmail.com</div>
+            <div class="information">
+                <%= userData.email %> 
+            </div>
         </div>
         <div class="data">
             <div class="label">Password</div>
