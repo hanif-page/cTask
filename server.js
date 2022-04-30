@@ -20,7 +20,7 @@ app.set('layout', 'main-layout/layout')
 app.use(expressLayouts)
 app.use(express.static('public'))
 app.use(methodOverride("_method"))
-app.use(bodyParser.urlencoded({limit: "50mb", extended: false}))
+app.use(bodyParser.urlencoded({limit: "10mb", extended: false}))
 
 // Requiring router as a middleware
 const indexRoute = require("./routes/index")
