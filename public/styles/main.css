@@ -10,6 +10,8 @@
     --main-peach: #FF6F61;
     --danger: #FF3D3D;
     --success: #00EE34;
+    --danger-lite: rgba(255, 61, 61, .1);
+    --success-lite: rgba(0, 238, 52, .1);
     --main-blue: #1DAEFF;
     --main-white: #FFFFFF;
     --main-black: #333333;
@@ -73,6 +75,7 @@ main
 {
     width: 100%;
     font-size: .85em;
+    font-weight: 500;
     opacity: .8;
     padding: .8rem;
     margin-bottom: .2rem;
@@ -84,14 +87,16 @@ main
 
 .error-banner
 {
-    background: var(--danger);
-    color: var(--main-white);
+    background: var(--danger-lite);
+    color: var(--danger);
+    border: 1px solid var(--danger);
 }
 
 .success-banner
 {
-    background: var(--success);
-    color: var(--main-white);
+    background: var(--success-lite);
+    color: var(--success);
+    border: 1px solid var(--success);
 }
 
 .banner .close-icon 

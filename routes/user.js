@@ -66,19 +66,18 @@ router.put('/profile/edit', async (req, res) => {
     }
 })
 
-router.get("/profile/edit-password", ensureAuthenticated, (req, res) => {
-    renderEditpasswordPage(res, req)
-})
+router.get("/profile/edit-password", ensureAuthenticated, (req, res) => renderEditpasswordPage(res, req))
 
-router.put("/profile/edit-password", (req, res) => {
+router.put("/profile/edit-password", async (req, res) => {
     const { oldpassword, newpassword, newpassword2, targetemail } = req.body
     let errors = []
+    const user = await User.findOne({ email: targetemail })
 
     // check required fields
     if(!oldpassword || !newpassword || !newpassword2) errors.push({ msg: "Please fill in all fields" })
 
     // check if the old password correct or not...
-    // if(!isPasswordMatch(targetemail, oldpassword)) errors.push({ msg: "Wrong old password" }) // STILL NOT WORK PROPERLY
+    if(!bcrypt.compareSync(oldpassword, user.password)) errors.push({ msg: "Wrong old password" }) 
 
     // check the similarity of old pass and new pass
     if(oldpassword === newpassword) errors.push({ msg: "New password cannot be the same as old"})
@@ -92,17 +91,28 @@ router.put("/profile/edit-password", (req, res) => {
     // check errors count
     if(errors.length > 0) renderEditpasswordPage(res, req, errors, req.body)
 
-    // ERROR
-    // - Cannot read properties of undefined (reading 'username') => I think it's an error on the passport setting, so try to look up to it.
-
+    // Validation passed
     else 
     {
-        // Validation passed
-        console.log("Success")
-        res.redirect("/user/profile")
-
         // Edit password database logic
-        // ...
+        bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newpassword, salt, async (err, hash) => {
+                if(err) throw err
+
+                // set new password
+                user.password = hash 
+
+                try 
+                { 
+                    // save data
+                    await user.save()
+                    
+                    req.flash('success_msg', 'Password successfully changed')
+                    res.redirect('/user/profile')
+                }
+                catch(err) { console.log(err) }
+            })
+        })
     }
 })
 
@@ -116,18 +126,6 @@ const saveProfilePict = (userDB, profilePictEncoded) => {
         userDB.profilePictureType = profilePict.type
     }
 } 
-
-// STILL NOT WORK PROPERLY
-const isPasswordMatch = async (targetEmail, password) => {
-    const user = await User.findOne({ email: targetEmail })
-
-    // Mathing Password
-    bcrypt.compare(password, user.password, (err, isMatch) => {
-        if(err) throw err
-        if(isMatch) return true
-        else return false // unsuccess
-    })
-}
 
 const renderEditpasswordPage = (res, req, errors = [], lastInput = {}) => {
     res.render("update-password", {
