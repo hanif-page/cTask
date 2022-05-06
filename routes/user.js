@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const bcrypt = require("bcryptjs")
 const { ensureAuthenticated } = require("../config/authenticate")
+const { reduce_image_file_size } = require("../config/image-reducer")
 
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
 
@@ -33,7 +34,7 @@ router.put('/profile/edit', async (req, res) => {
         user.username = username 
         user.email = email 
 
-        if(profilepicture != null && profilepicture !== "") saveProfilePict(user, profilepicture)
+        if(profilepicture != null && profilepicture !== "") resizeAndSaveProfilePict(user, profilepicture)
         
         await user.save()
 
@@ -56,7 +57,7 @@ router.put('/profile/edit', async (req, res) => {
             user.username = username 
             user.email = email 
     
-            if(profilepicture != null && profilepicture !== "") saveProfilePict(user, profilepicture)
+            if(profilepicture != null && profilepicture !== "") resizeAndSaveProfilePict(user, profilepicture)
             
             await user.save()
     
@@ -119,6 +120,8 @@ router.put("/profile/edit-password", async (req, res) => {
 const saveProfilePict = (userDB, profilePictEncoded) => {
     if(profilePictEncoded == null) return 
     const profilePict = JSON.parse(profilePictEncoded)
+    // .data is the base64 string of the file/image
+    // .type is the type of the image file extension
 
     if(profilePict != null && imageMimeTypes.includes(profilePict.type))
     {
@@ -126,6 +129,23 @@ const saveProfilePict = (userDB, profilePictEncoded) => {
         userDB.profilePictureType = profilePict.type
     }
 } 
+
+const resizeAndSaveProfilePict = async (userDB, profilePictEncoded) => {
+    if(profilePictEncoded == null) return 
+    const profilePict = JSON.parse(profilePictEncoded)
+    // .data is the base64 string of the file/image
+    // .type is the type of the image file extension
+    
+    const resizedProfilePictPath = await reduce_image_file_size(profilePict)
+    const resizedProfilePictData = new Buffer.from(resizedProfilePictPath.split(",")[1], "base64")
+    const resizedProfilePictType = resizedProfilePictPath.substring(resizedProfilePictPath.indexOf(":") + 1, resizedProfilePictPath.indexOf(";")) 
+
+    if(profilePict != null && imageMimeTypes.includes(resizedProfilePictType))
+    {
+        userDB.profilePicture = resizedProfilePictData
+        userDB.profilePictureType = resizedProfilePictType
+    }
+}
 
 const renderEditpasswordPage = (res, req, errors = [], lastInput = {}) => {
     res.render("update-password", {

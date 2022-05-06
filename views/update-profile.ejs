@@ -1,7 +1,7 @@
 <%- include("partials/messages")  %> 
 
 <form action="/user/profile/edit?_method=PUT" method="post" class="profile-content inner-container">
-    <input name="profilepicture" type="file" id="pp-fileinput" class="filepond">
+    <input name="profilepicture" type="file" accept="image/*" id="pp-fileinput" class="filepond">
     <div class="pp-container">
         <!-- Check if the profile picture is undefined -->
         <% if (userData.profilePicturePath) { %>
