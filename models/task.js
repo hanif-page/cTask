@@ -1,4 +1,13 @@
 const mongoose = require("mongoose")
+const validate = require("mongoose-validator")
+
+const textValidator = [
+    validate({
+        validator: "isLength",
+        arguments: [1, 26],
+        message: "Task text should be between {ARGS[0]} and {ARGS[1]} characters"
+    })
+]
 
 const taskSchema = new mongoose.Schema({
     user: {
@@ -7,13 +16,10 @@ const taskSchema = new mongoose.Schema({
     },
     tasks: [
         {
-            taskID: {
-                type: String,
-                required: true
-            },
             text: {
                 type: String,
-                required: true
+                required: true,
+                validate: textValidator
             },
             isChecked: {
                 type: Boolean,

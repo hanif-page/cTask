@@ -25,6 +25,7 @@ app.use(bodyParser.urlencoded({limit: "10mb", extended: false}))
 // Requiring router as a middleware
 const indexRoute = require("./routes/index")
 const userRoute = require("./routes/user")
+const taskRoute = require("./routes/task")
 
 // Connect to DB
 const mongoose = require("mongoose")
@@ -63,6 +64,7 @@ app.use((req, res, next) => {
 // Use the router middleware
 app.use("/", indexRoute)
 app.use("/user", userRoute)
+app.use("/task", taskRoute)
 
 // Page Not Found
 app.use(ensureAuthenticated, (req, res, next) => {
