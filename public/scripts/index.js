@@ -57,21 +57,17 @@ const getTasks = async () => {
 
 const addTask = async () => {
     const text = document.querySelector("input.newTask").value.trim()
-    if(text.length < 1 || text.length > 26) alert(`Task name should be between 1 and 26 characters (current : ${text.length})`)
-    else 
-    {
-        const body = { text: text }
-    
-        await getData('/task', { 
-            method: "POST", 
-            body: JSON.stringify(body),
-            headers: { 
-                "Content-type": 'application/json'
-            } 
-        })
-    
-        window.location.reload()
-    }
+    const body = { text: text }
+
+    await getData('/task', { 
+        method: "POST", 
+        body: JSON.stringify(body),
+        headers: { 
+            "Content-type": 'application/json'
+        } 
+    })
+
+    window.location.reload()
 }
 
 const deleteTasks = async () => {

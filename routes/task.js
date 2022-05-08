@@ -54,17 +54,9 @@ router.post('/', async (req, res) => {
         catch(err) 
         { 
             // console.log(err.errors)
-
-            if(newTask.text.length < 1 || newTask.text.length > 26) 
-            {
-                req.flash("error_msg", "Task name should be between 1 and 26 characters")
-                res.sendStatus(300)
-            }
-            else 
-            {
-                req.flash("error_msg", "Error when adding new task")
-                res.sendStatus(500)
-            }
+            
+            req.flash("error_msg", "Error when adding new task")
+            res.sendStatus(500)
             
         }
     }

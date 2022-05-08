@@ -1,5 +1,10 @@
 @import './custom-checkbox.css';
 
+:root 
+{
+    --task-item-gap: .98rem;
+}
+
 .index-header
 {
     display: flex;
@@ -11,7 +16,6 @@
 {
     display: flex;
     align-items: center;
-    /* flex-direction: row-reverse; */
     gap: .5rem;
 }
 
@@ -94,8 +98,7 @@
 .index-content .task 
 {
     display: flex;
-    gap: .98rem;
-    /* padding: .5rem 0; */
+    gap: var(--task-item-gap);
 }
 
 .index-content .task form 
@@ -105,14 +108,21 @@
     z-index: -1;
 }
 
-/* If the word is overload, it will be broke the checkbox size. So FIX IT! */
+/* [FIXED] If the word is overload, it will be broke the checkbox size. So FIX IT! */
 .index-content .task .task-section
 {
-    flex-grow: 1;
-    
-    display: inherit;
+    /* flex-grow: 1; */
+    width: 100%;
+
+    display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: var(--task-item-gap);
+}
+
+.index-content .task-section .task-name
+{
+    line-height: 1.3;
 }
 
 .index-content .task-section .task-name.checked 

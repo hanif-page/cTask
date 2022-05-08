@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 const validate = require("mongoose-validator")
 
+// Not getting use anymore, but I'm just keeping it (just in case)
 const textValidator = [
     validate({
         validator: "isLength",
@@ -18,8 +19,7 @@ const taskSchema = new mongoose.Schema({
         {
             text: {
                 type: String,
-                required: true,
-                validate: textValidator
+                required: true
             },
             isChecked: {
                 type: Boolean,

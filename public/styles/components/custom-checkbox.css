@@ -1,3 +1,8 @@
+:root 
+{
+    --checkbox-size: 24px;
+}
+
 .checkbox-container 
 {
     display: block;
@@ -9,24 +14,24 @@
     -ms-user-select: none;
     user-select: none;
 
-    width: 24px;
-    height: 24px;
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
 }
 
 .checkbox-container input 
 {
     position: absolute;
     z-index: 1;
-    height: 100%;
-    width: 100%;
+    height: var(--checkbox-size);
+    width: var(--checkbox-size);
     cursor: pointer;
     opacity: 0;
 }
 
 .checkbox-container .checkmark 
 {
-    width: 100%;
-    height: 100%;
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
     position: absolute;
 
     background: var(--main-white);
@@ -55,5 +60,3 @@
 .checkbox-container input:checked ~ .checkmark .check-icon {
     opacity: 1;
 }
-
-/* CONTINUE IMPLEMENT THIS CHECKBOX! */
