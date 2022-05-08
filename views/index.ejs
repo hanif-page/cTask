@@ -2,74 +2,17 @@
 
 <div class="index-content inner-container">
 
-    <form action="" class="top">
-        <input type="text" name="newTask" class="newTask" placeholder="+ New Task">
+    <form onsubmit="addTask()" action="" class="top">
+        <input type="text" class="newTask" placeholder="+ New Task (Ctrl K)">
         <button>Add</button>
     </form>
 
-    <section class="bottom">
-        <% let dataCount = 1 %> 
-
-        <% if (dataCount > 0) { %>             
+    <section class="bottom">     
             <form action="">
-                <a href="" class="clear-all-task">Clear All Task</a>
-            </form>
+                <a href="" onclick="deleteTasks()" class="clear-all-task">Clear All Task</a>
+            </form>      
     
-            <ul class="all-task">
-                <li class="task">
-                    <div class="checkbox-container">
-                        <!-- <form action="">
-                            <input type="checkbox">
-                        </form> -->
-
-                        <input type="checkbox">
-                        <span class="checkmark">
-                            <span class="iconify check-icon" data-icon="akar-icons:check"></span>
-                        </span>
-                    </div>
-
-                    <div class="task-section">
-                        <div class="task-name">Hello World</div>
-                        <a href="/user/task/delete/dwajdjawdwjdiwaj" class="delete-task">
-                            <span class="iconify trash-icon" data-icon="clarity:trash-line"></span>
-                        </a>
-                    </div>
-                </li>
-                <li class="task">
-                    <div class="checkbox-container">
-                        <input type="checkbox">
-                        <span class="checkmark">
-                            <span class="iconify check-icon" data-icon="akar-icons:check"></span>
-                        </span>
-                    </div>
-
-                    <div class="task-section">
-                        <div class="task-name">Task 1</div>
-                        <a href="/user/task/delete/dwajdjawdwjdiwaj||userID" class="delete-task">
-                            <span class="iconify trash-icon" data-icon="clarity:trash-line"></span>
-                        </a>
-                    </div>
-                </li>
-                <li class="task">
-                    <div class="checkbox-container">
-                        <input type="checkbox">
-                        <span class="checkmark">
-                            <span class="iconify check-icon" data-icon="akar-icons:check"></span>
-                        </span>
-                    </div>
-
-                    <div class="task-section">
-                        <div class="task-name">LLorem ipsum, dolo dwadwa dd</div>
-                        <a href="/user/task/delete/dwajdjawdwjdiwaj||userID" class="delete-task">
-                            <span class="iconify trash-icon" data-icon="clarity:trash-line"></span>
-                        </a>
-                    </div>
-                </li>
-            </ul>
-        <% } else { %>
-            <p style="color: var(--main-gray); text-align: center;">No Task Added. . .</p>
-        <% } %> 
-        
+            <ul class="all-task"></ul>
     </section>
 </div>
 
