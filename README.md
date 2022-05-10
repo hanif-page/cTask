@@ -1,5 +1,6 @@
 ### cTask
 
-note : This project is still under construction and building process.
-- To Do name can't be more than 28 characters.
-- Continue slicing : Start slicing the profile page, and edit profile page.
+This project is finished. We always keep trying to improve this project, so we're apologize if there's still a bug or an unexpected result from the site.
+
+Next update : 
+- Build a loading screen (for the page loading) and loading text (while loading all the task getting displayed).
