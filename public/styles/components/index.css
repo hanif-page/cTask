@@ -82,6 +82,11 @@
     justify-content: flex-end;
 }
 
+.index-content .bottom form.hidden 
+{
+    display: none;
+}
+
 .index-content .bottom form .clear-all-task 
 {
     color: var(--danger);

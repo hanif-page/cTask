@@ -39,7 +39,8 @@ db.once('open', () => console.log("Connected to Mongoose..."))
 app.use(session({
     secret: 'secret',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 } // max age will be 7 days.
 }))
 
 // Passport config 

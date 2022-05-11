@@ -8,11 +8,14 @@
     </form>
 
     <section class="bottom">     
-            <form action="">
+            <form action="" class="hidden">
                 <a href="" onclick="deleteTasks()" class="clear-all-task">Clear All Task</a>
             </form>      
     
+            <%- include("partials/loader-task")  %>
+             
             <ul class="all-task"></ul>
+
     </section>
 </div>
 

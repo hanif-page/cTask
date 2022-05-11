@@ -1,12 +1,16 @@
 window.addEventListener("load", async () => {
+    displayLoaderTask();
+
     const data = await getTasks()
 
     if(data.msg) window.location.reload()
     else 
     {
+        closeLoaderTask();
         const tasks = data.tasks // the array of task
 
         const bottomContainer = document.querySelector(".index-content .bottom")
+        const clearAllTask = document.querySelector(".index-content .bottom form")
         const taskContainer = document.querySelector(".index-content .all-task")
 
         if(tasks.length === 0) 
@@ -16,6 +20,7 @@ window.addEventListener("load", async () => {
         }
         else 
         {
+            clearAllTask.classList.remove("hidden")
             tasks.forEach(task => {
                 let checkedClass = "" 
                 if(task.isChecked) checkedClass = "checked"; 

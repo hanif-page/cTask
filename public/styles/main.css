@@ -3,6 +3,7 @@
 @import './components/index.css';
 @import './components/profile.css';
 @import './components/not-found.css';
+@import './components/loader.css';
 
 :root 
 {
