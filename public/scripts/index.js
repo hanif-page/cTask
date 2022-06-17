@@ -60,7 +60,9 @@ const getTasks = async () => {
     })
 }
 
-const addTask = async () => {
+const addTask = async (e, button) => {
+    e.preventDefault()
+
     const text = document.querySelector("input.newTask").value.trim()
     const body = { text: text }
 
@@ -72,10 +74,15 @@ const addTask = async () => {
         } 
     })
 
+    // remove the recent text from the input
+    button.querySelector("input").value = ""
+
     window.location.reload()
 }
 
-const deleteTasks = async () => {
+const deleteTasks = async (e) => {
+    e.preventDefault()
+
     await getData('/task', { method: "DELETE" })
 
     window.location.reload();

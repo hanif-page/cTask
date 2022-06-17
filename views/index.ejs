@@ -2,14 +2,14 @@
 
 <div class="index-content inner-container">
 
-    <form onsubmit="addTask()" action="" class="top">
+    <form onsubmit="addTask(event, this)" action="" class="top">
         <input type="text" class="newTask" placeholder="+ New Task (Ctrl K)">
         <button>Add</button>
     </form>
 
     <section class="bottom">     
             <form action="" class="hidden">
-                <a href="" onclick="deleteTasks()" class="clear-all-task">Clear All Task</a>
+                <a href="" onclick="deleteTasks(event)" class="clear-all-task">Clear All Task</a>
             </form>      
     
             <%- include("partials/loader-task")  %>

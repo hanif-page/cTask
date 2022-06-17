@@ -65,6 +65,11 @@ header
     font-size: 1.5em;
 }
 
+.cTask-logo span 
+{
+    color: var(--main-peach);
+}
+
 main 
 {
     min-height: 100vh;
