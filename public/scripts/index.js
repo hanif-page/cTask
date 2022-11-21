@@ -66,7 +66,7 @@ const addTask = async (e, button) => {
     const text = document.querySelector("input.newTask").value.trim()
     const body = { text: text }
 
-    await getData('/task', { 
+    const success = await getData('/task', { 
         method: "POST", 
         body: JSON.stringify(body),
         headers: { 
@@ -74,10 +74,14 @@ const addTask = async (e, button) => {
         } 
     })
 
-    // remove the recent text from the input
-    button.querySelector("input").value = ""
+    if(success)
+    {
+        // remove the recent text from the input
+        button.querySelector("input").value = ""
+    
+        window.location.reload()
+    }
 
-    window.location.reload()
 }
 
 const deleteTasks = async (e) => {
