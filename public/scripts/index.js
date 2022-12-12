@@ -1,50 +1,10 @@
 window.addEventListener("load", async () => {
-    displayLoaderTask();
+    await updateData();
 
-    const data = await getTasks()
-
-    if(data.msg) window.location.reload()
-    else 
-    {
-        closeLoaderTask();
-        const tasks = data.tasks // the array of task
-
-        const bottomContainer = document.querySelector(".index-content .bottom")
-        const clearAllTask = document.querySelector(".index-content .bottom form")
-        const taskContainer = document.querySelector(".index-content .all-task")
-
-        if(tasks.length === 0) 
-        {
-            const noTaskEl = `<p style="color: var(--main-gray); text-align: center;">No Task Added. . .</p>`
-            bottomContainer.innerHTML = noTaskEl
-        }
-        else 
-        {
-            clearAllTask.classList.remove("hidden")
-            tasks.forEach(task => {
-                let checkedClass = "" 
-                if(task.isChecked) checkedClass = "checked"; 
-                const taskElement = `
-                    <li class="task">
-                        <div class="checkbox-container">            
-                            <input type="checkbox" onclick="checkboxClicked(this)" ${checkedClass}>
-                            <span class="checkmark">
-                                <span class="iconify check-icon" data-icon="akar-icons:check"></span>
-                            </span>
-                        </div>
-                    
-                        <div class="task-section">
-                            <div class="task-name ${checkedClass}">${task.text}</div>
-                            <div data-taskid="${task._id}" onclick="deleteTask(this.dataset.taskid)" class="delete-task" style="cursor: pointer">
-                                <span class="iconify trash-icon" data-icon="clarity:trash-line"></span>
-                            </div>
-                        </div>
-                    </li>
-                    `
-                    taskContainer.innerHTML += taskElement
-                })
-        }
-    }
+    // automatically updating data every 30s (not the most effective, bcs it's firing the API all the time without any pause, and keep generating the frontend data too)
+    const timeInterval = 20000 // 30s, bcs it's for automatically updating a data on other opened tab.
+    setInterval(updateData, timeInterval)
+    // Alternative Idea : Check if there any data change from the db, compare it with the last received data. If true, then change data. If false, then do nothing. Maybe create a boolean data on the db, the default is false. When change data, make it true. Then if it's displayed, make it false again.
 })
 
 const getData = (url, option = {}) => {
@@ -79,7 +39,7 @@ const addTask = async (e, button) => {
         // remove the recent text from the input
         button.querySelector("input").value = ""
     
-        window.location.reload()
+        await updateData();
     }
 
 }
@@ -89,7 +49,7 @@ const deleteTasks = async (e) => {
 
     await getData('/task', { method: "DELETE" })
 
-    window.location.reload();
+    await updateData();
 }
 
 const updateTaskChecked = async (taskid, update = true) => {
@@ -101,13 +61,13 @@ const updateTaskChecked = async (taskid, update = true) => {
         } 
     })
 
-    window.location.reload()
+    await updateData();
 }
 
 const deleteTask = async (taskid) => {
     await getData(`/task/${taskid}`, { method: "DELETE" })
 
-    window.location.reload()
+    await updateData();
 }
 
 // Quick Shortcut to the search bar
@@ -120,3 +80,54 @@ window.addEventListener('keydown', (e) => {
         searchInput.focus()
     }
 })
+
+const updateData = async () => {
+
+    displayLoaderTask();
+
+    const data = await getTasks()
+
+    if(data.msg) window.location.reload()
+    else 
+    {
+        closeLoaderTask();
+        const tasks = data.tasks // the array of task
+
+        const bottomContainer = document.querySelector(".index-content .bottom")
+        const clearAllTask = document.querySelector(".index-content .bottom form")
+        const taskContainer = document.querySelector(".index-content .all-task")
+
+        if(tasks.length === 0) 
+        {
+            const noTaskEl = `<p style="color: var(--main-gray); text-align: center;">No Task Added. . .</p>`
+            bottomContainer.innerHTML = noTaskEl
+        }
+        else 
+        {
+            clearAllTask.classList.remove("hidden")
+            taskContainer.innerHTML = '' // emptying the task container
+            tasks.forEach(task => {
+                let checkedClass = "" 
+                if(task.isChecked) checkedClass = "checked"; 
+                const taskElement = `
+                    <li class="task">
+                        <div class="checkbox-container">            
+                            <input type="checkbox" onclick="checkboxClicked(this)" ${checkedClass}>
+                            <span class="checkmark">
+                                <span class="iconify check-icon" data-icon="akar-icons:check"></span>
+                            </span>
+                        </div>
+                    
+                        <div class="task-section">
+                            <div class="task-name ${checkedClass}">${task.text}</div>
+                            <div data-taskid="${task._id}" onclick="deleteTask(this.dataset.taskid)" class="delete-task" style="cursor: pointer">
+                                <span class="iconify trash-icon" data-icon="clarity:trash-line"></span>
+                            </div>
+                        </div>
+                    </li>
+                    `
+                    taskContainer.innerHTML += taskElement
+                })
+        }
+    }
+}
