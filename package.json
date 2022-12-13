@@ -2,7 +2,7 @@
   "name": "ctask",
   "version": "1.0.0",
   "engines": {
-    "node": "16.15.0"
+    "node": "18.12.1"
   },
   "description": "",
   "main": "server.js",
@@ -16,7 +16,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
-    "canvas": "^2.9.1",
+    "canvas": "^2.10.2",
     "connect-flash": "^0.1.1",
     "dotenv": "^16.0.0",
     "ejs": "^3.1.7",
