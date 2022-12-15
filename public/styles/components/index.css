@@ -135,9 +135,23 @@
     text-decoration: line-through;
 }
 
+.index-content .task-section .task-option 
+{
+    display: flex;
+    gap: 1rem;
+    flex-direction: row-reverse;
+}
+
 .index-content .task-section .trash-icon
 {
     width: 20px;
     height: 20px;
     color: var(--danger);
+}
+
+.index-content .task-section .edit-icon
+{
+    width: 20px;
+    height: 20px;
+    color: var(--main-purple);
 }

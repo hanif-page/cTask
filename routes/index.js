@@ -5,6 +5,7 @@ const passport = require("passport")
 const { ensureAuthenticated, forwardAuthenticated } = require("../config/authenticate")
 
 const User = require("../models/user")
+const Task = require("../models/task")
 
 router.get('/', ensureAuthenticated, (req, res) => {
     res.render("index", {
@@ -14,6 +15,52 @@ router.get('/', ensureAuthenticated, (req, res) => {
         userData: req.user
     })
 })
+
+// UNFINISHED
+router.get("/edit/:taskID", ensureAuthenticated, async (req, res) => {
+    const user = await getUser(req)
+
+    if(user._id)
+    {
+        try 
+        {
+            const task = await Task.findOne({ user: user._id })
+
+            const targetedTask = task.tasks.find(task => task._id == req.params.taskID)
+            if(targetedTask)
+            {
+                var prevTask = targetedTask.text
+            }
+            else
+            {
+                var prevTask = ""
+            } 
+        }
+        catch (err)
+        {
+            console.log(err)
+        }
+    }
+
+    res.render("task-edit", {
+        pageType: "profile",
+        title: "cTask | Task Edit",
+        userProfilePictUrl: "",
+        userData: req.user,
+        taskID: req.params.taskID,
+        prevTask : prevTask
+    })
+})
+
+// router.get("/task/detail/:taskID", ensureAuthenticated, (req, res) => {
+//     res.render("task-edit", {
+//         pageType: "profile",
+//         title: "cTask | Edit Task Text",
+//         userProfilePictUrl: "",
+//         userData: req.user,
+//         taskID: req.params.taskID
+//     })
+// })
 
 router.get('/login', forwardAuthenticated,(req, res) => {
     res.render("login", {
@@ -124,6 +171,13 @@ const renderLoginPage = (res, errors = [], lastInput = {}) => {
         errors,
         lastInput
     })
+}
+
+const getUser = async (req) => {
+    const userEmail = req.user.email
+    const user = await User.findOne({ email: userEmail })
+
+    return user // will be mainly use as boolean statement (either true or false)
 }
 
 module.exports = router

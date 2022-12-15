@@ -127,6 +127,41 @@ router.put('/:taskID', async (req, res) => {
     }
 })
 
+// UNFINISHED
+router.put('/text-edit/:taskID', async (req, res) => {
+    // res.send({ id : req.params.taskID, data : req.body })
+
+    const user = await getUser(req)
+    
+    if(user._id)
+    {
+        try 
+        {
+            const task = await Task.findOne({ user: user._id })
+
+            const targetedTask = task.tasks.find(task => task._id == req.params.taskID)
+            if(targetedTask)
+            {
+                targetedTask.text = req.body.task
+                
+                await task.save();
+                req.flash('success_msg', 'Task updated!')
+                // res.sendStatus(200)
+                res.redirect("/")
+            }
+            else throw new Error("No task with that taskID")
+        }
+        catch(err) 
+        { 
+            console.log(err)
+            
+            req.flash("error_msg", "Error when updating task")
+            // res.sendStatus(500)
+            res.redirect(`/edit/${req.params.taskID}`)
+        }
+    }
+})
+
 router.delete('/:taskID', async (req, res) => {
     const user = await getUser(req)
     

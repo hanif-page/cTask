@@ -70,6 +70,10 @@ const deleteTask = async (taskid) => {
     await updateData();
 }
 
+const editTask = (taskid) => {
+    window.location.href = `/edit/${taskid}`
+}
+
 // Quick Shortcut to the search bar
 window.addEventListener('keydown', (e) => {
     if(e.ctrlKey && e.key === "k")
@@ -120,9 +124,14 @@ const updateData = async () => {
                     
                         <div class="task-section">
                             <div class="task-name ${checkedClass}">${task.text}</div>
-                            <div data-taskid="${task._id}" onclick="deleteTask(this.dataset.taskid)" class="delete-task" style="cursor: pointer">
-                                <span class="iconify trash-icon" data-icon="clarity:trash-line"></span>
-                            </div>
+                            <div class="task-option">
+                                <div data-taskid="${task._id}" onclick="deleteTask(this.dataset.taskid)" class="delete-task" style="cursor: pointer">
+                                    <span class="iconify trash-icon" data-icon="clarity:trash-line"></span>
+                                </div>
+                                <div data-taskid="${task._id}" onclick="editTask(this.dataset.taskid)" class="edit-task" style="cursor: pointer">
+                                    <span class="iconify edit-icon" data-icon="material-symbols:edit"></span>
+                                </div>  
+                            </div>                          
                         </div>
                     </li>
                     `
