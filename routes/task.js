@@ -143,6 +143,7 @@ router.put('/text-edit/:taskID', async (req, res) => {
             if(targetedTask)
             {
                 targetedTask.text = req.body.task
+                targetedTask.textDetail = req.body.taskDetail
                 
                 await task.save();
                 req.flash('success_msg', 'Task updated!')

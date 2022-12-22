@@ -123,7 +123,7 @@ const updateData = async () => {
                         </div>
                     
                         <div class="task-section">
-                            <div class="task-name ${checkedClass}">${task.text}</div>
+                            <div onclick="window.location.href='/detail/${task._id}'" class="task-name ${checkedClass}">${task.text}</div>
                             <div class="task-option">
                                 <div data-taskid="${task._id}" onclick="deleteTask(this.dataset.taskid)" class="delete-task" style="cursor: pointer">
                                     <span class="iconify trash-icon" data-icon="clarity:trash-line"></span>

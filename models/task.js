@@ -30,6 +30,11 @@ const taskSchema = new mongoose.Schema({
                 type: Date,
                 required: true,
                 default: Date.now
+            },
+            textDetail: {
+                type: String,
+                required: true,
+                default: "..."
             }
         }
     ],

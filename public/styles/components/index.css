@@ -128,6 +128,13 @@
 .index-content .task-section .task-name
 {
     line-height: 1.3;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.index-content .task-section .task-name:hover
+{
+    opacity: .5;
 }
 
 .index-content .task-section .task-name.checked 
@@ -142,16 +149,17 @@
     flex-direction: row-reverse;
 }
 
-.index-content .task-section .trash-icon
+.trash-icon
 {
     width: 20px;
     height: 20px;
     color: var(--danger);
 }
 
-.index-content .task-section .edit-icon
+.edit-icon
 {
     width: 20px;
     height: 20px;
     color: var(--main-purple);
 }
+

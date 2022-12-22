@@ -36,6 +36,12 @@
     
     <% if (pageType == "profile") { %>
         <script defer src="/scripts/fileUpload.js"></script>
+        <script defer >
+            // for /detail/:taskID page, because it using the profile page type 
+            const editTask = (taskid) => {
+                window.location.href = `/edit/${taskid}`
+            }
+        </script>
     <% } %>
 
     <% if (pageType == "index") { %>

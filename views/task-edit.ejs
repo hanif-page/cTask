@@ -1,16 +1,13 @@
-
-<!-- UNFINISHED --> 
 <form action="/task/text-edit/<%= taskID %>?_method=PUT" method="post" class="profile-content inner-container">
     <div class="data-section">
         <div class="data">
             <div class="label">Task</div>
-            <!-- <input class="information" type="text" name="task" value="<%=  %>"> -->
             <input required class="information" type="text" name="task" value="<%= prevTask %>">
-        </div>  
-        <!-- <div class="data">
-            <div class="label">Task Detail</div>
-            <input type="text" class="information" name="task-detail" value="Task Detail...">
-        </div> -->
+        </div>
+        <div class="data">
+            <div class="label">Detail</div>
+            <textarea name="taskDetail" required class="information"><%= prevDetail %></textarea>
+        </div>
     </div>
 
     <div class="buttons">

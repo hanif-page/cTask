@@ -16,7 +16,6 @@ router.get('/', ensureAuthenticated, (req, res) => {
     })
 })
 
-// UNFINISHED
 router.get("/edit/:taskID", ensureAuthenticated, async (req, res) => {
     const user = await getUser(req)
 
@@ -30,10 +29,11 @@ router.get("/edit/:taskID", ensureAuthenticated, async (req, res) => {
             if(targetedTask)
             {
                 var prevTask = targetedTask.text
+                var prevDetail = targetedTask.textDetail
             }
             else
             {
-                var prevTask = ""
+                var prevTask, prevDetail = ""
             } 
         }
         catch (err)
@@ -48,19 +48,49 @@ router.get("/edit/:taskID", ensureAuthenticated, async (req, res) => {
         userProfilePictUrl: "",
         userData: req.user,
         taskID: req.params.taskID,
-        prevTask : prevTask
+        prevTask : prevTask,
+        prevDetail : prevDetail
     })
 })
 
-// router.get("/task/detail/:taskID", ensureAuthenticated, (req, res) => {
-//     res.render("task-edit", {
-//         pageType: "profile",
-//         title: "cTask | Edit Task Text",
-//         userProfilePictUrl: "",
-//         userData: req.user,
-//         taskID: req.params.taskID
-//     })
-// })
+router.get("/detail/:taskID", ensureAuthenticated, async (req, res) => {
+    const user = await getUser(req)
+
+    if(user._id)
+    {
+        try 
+        {
+            const task = await Task.findOne({ user: user._id})
+
+            const targetedTask = task.tasks.find(task => task._id == req.params.taskID)
+            if(targetedTask)
+            {
+                // check if text detail object is already there or not. If not, then initialize it
+                if(!targetedTask.textDetail)
+                {
+                    targetedTask.textDetail = "..."
+                    await task.save();
+                }
+
+                res.render("task-detail", {
+                    pageType: "profile",
+                    title: "cTask | Task Detail",
+                    userProfilePictUrl: "",
+                    userData: req.user,
+                    task: targetedTask
+                })
+            }
+            else 
+            {
+                res.redirect("/")
+            }
+        }
+        catch (err)
+        {
+            console.log(err)
+        }
+    }
+})
 
 router.get('/login', forwardAuthenticated,(req, res) => {
     res.render("login", {

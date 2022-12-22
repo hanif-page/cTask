@@ -1,0 +1,32 @@
+<div class="profile-content inner-container">
+    <div class="data-section">
+        <div class="data">
+            <div class="information detail-title">
+                <!-- Lorem ipsum dolor sit amet. -->
+                <%= task.text %>
+            </div>
+        </div>  
+        <div class="data">
+            <div class="information detail-detail">
+                <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum illo sequi quibusdam dolorum reiciendis dolore nesciunt cupiditate libero repudiandae consectetur. -->
+                <%= task.textDetail %>
+            </div>
+        </div>
+        <div class="data">
+            <div class="label">Status</div>
+            <% if (task.isChecked) { %>
+                <div class="information completed">COMPLETED</div>
+            <% } else { %>
+                <div class="information uncompleted">UNCOMPLETED</div>
+            <% } %>
+             
+        </div>
+    </div>
+
+    <div class="buttons">
+        <!-- ALL THE onclick attributes still not working, bcs I haven't set the function inside it. Try to import it from index.js to script.js, or just copy n paste the code straight to script.js -->
+        <div data-taskid="<%= task._id %>" onclick="editTask(this.dataset.taskid)" class="edit-task" style="cursor: pointer">
+            <span class="iconify edit-icon" data-icon="material-symbols:edit"></span>
+        </div>  
+    </div>
+</div>
