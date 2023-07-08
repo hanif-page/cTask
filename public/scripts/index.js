@@ -97,19 +97,32 @@ const updateData = async () => {
         closeLoaderTask();
         const tasks = data.tasks // the array of task
 
-        const bottomContainer = document.querySelector(".index-content .bottom")
+        const indexContent = document.querySelector(".index-content")
         const clearAllTask = document.querySelector(".index-content .bottom form")
         const taskContainer = document.querySelector(".index-content .all-task")
 
+        let noTaskSign = document.querySelector(".noTaskSign")
         if(tasks.length === 0) 
         {
-            const noTaskEl = `<p style="color: var(--main-gray); text-align: center;">No Task Added. . .</p>`
-            bottomContainer.innerHTML = noTaskEl
+            // remove the taskContainer content inside (to make all the task disappear, when the tasks is empty)
+            taskContainer.innerHTML = ''
+
+            // if the clearAllTask already hidden, then don't have to make it hidden again, or it will cause multiple "hidden" class
+            // make clearAllTask disappeared (set it hidden)
+            if(!clearAllTask.classList.contains("hidden")) clearAllTask.classList.add("hidden") 
+
+            if(!noTaskSign) {
+                noTaskSign = `<p class="noTaskSign" style="color: var(--main-gray); text-align: center;">No Task Added. . .</p>`
+                indexContent.innerHTML += noTaskSign
+            }
         }
         else 
         {
-            clearAllTask.classList.remove("hidden")
+            if(noTaskSign) noTaskSign.remove() // if noTaskSign is still there, then remove it
+
+            clearAllTask.classList.remove("hidden") // make the clearAllTask button appears again
             taskContainer.innerHTML = '' // emptying the task container
+            
             tasks.forEach(task => {
                 let checkedClass = "" 
                 if(task.isChecked) checkedClass = "checked"; 
